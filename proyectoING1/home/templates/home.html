@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/home.css'%}">
+</head>
+<body>
+<div class="buttons">
+    <form action="{% url 'redirectToLogIn' %}" method="post">
+        {% csrf_token %}
+        <button class="is" type="submit">Iniciar Sesión</button>
+    </form>
+
+    <form action="{% url 'redirectToLogInSuperUsr' %}" method="post">
+        {% csrf_token %}
+        <button class="isa" type="submit">Iniciar Sesión Administrador</button>
+    </form>
+    
+    <form action="{% url 'redirectToCreateAc' %}" method="post">
+        {% csrf_token %}
+        <button class="cc" type="submit">Crear Cuenta</button>
+    </form>
+</div>
+    <div class="footer">
+      <img src="static/images/logo.png" alt="Copyright">
+      Copyright 2024 | Design by Betatesters | All Rights reserved
+    </div>
+</body>
+</html>

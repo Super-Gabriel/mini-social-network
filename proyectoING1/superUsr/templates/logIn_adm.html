@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/iniciarSUsr.css'%}">
+</head>
+<body>
+    <div class="iniciarSdiv">
+        <a href="{% url 'home'%}">home</a>
+        <p>Iniciar Sesion Super Usuario (*-*)</p>
+        <form method="get" action="{% url 'logIn_adm'%}">            
+            <input type="email" name="correo" placeholder="  Correo electronico">
+            <input type="password" name="contra" placeholder="  Contraseña">
+            
+	        <img src="/static/images/penguinAdm.png" class="imgPenguin">
+            <button>iniciar</button>
+        </form><br>
+    </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="{% static 'css/header.css'%}">
+    <link rel="stylesheet" href="{% static 'css/perfil_success.css'%}">
+    {% include 'header.html' %}<br>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="cuadro">
+            Chats:
+            <div class="chats">
+                {% for friend in friends %}
+                <form action="{% url 'inbox' correo=correo correo1=friend.correof %}">
+                    <div class="publi">
+                        {{ friend.correof }}<button>Enviar mensaje</button>
+                    </div>
+                </form>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

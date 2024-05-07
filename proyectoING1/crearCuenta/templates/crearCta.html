@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/crearCta.css'%}">
+</head>
+<body>
+    <div class="cuadro">
+        <p>Crear cuenta</p>
+        <form method="post" action="{% url 'agregarCta'%}">
+            {% csrf_token %}
+
+            <input type="text" name="nombre" placeholder="  Nombre completo"  >
+            <input type="email" name="correo" placeholder="  Correo electronico">
+            <input type="password" name="contra" placeholder="  Contraseña">
+            <input type="password" name="contraValid" placeholder="  Validar contraseña">
+            <input type="date" name="fechaNac" placeholder="  Fecha de nacimiento">
+            <select name="genero">
+                <option value="h">Hombre</option>
+                <option value="m">Mujer</option>
+                <option value="o">Otro</option>
+            </select>
+            
+            <button>Crear</button>
+        </form>
+    </div>
+</body>
+</html>

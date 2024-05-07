@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="{% static 'css/header.css'%}">
+    <link rel="stylesheet" href="{% static 'css/perfil_success.css'%}">
+    {% include 'header_adm.html' %}<br>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="cuadro">
+            Administrar usuarios:
+            <div class="chats">
+                {% for user in users %}
+                    <div class="publi">
+                        <form action="{% url 'success_adm' correo=correo%}" method="get">
+                            <li>{{ user.correo }}:
+                                {% if user.alive == '1' %}
+                                    vivo
+                                {% else %}
+                                    bloqueado
+                                {% endif %}<br>
+                                <input type="hidden" value="{{ user.correo }}" name="email">
+                                <button name="1" value="1">Bloquear</button>
+                                <button name="2" value="2">Eliminar</button>
+                                <button name="3" value="3">Desbloquear</button>
+                            </li>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

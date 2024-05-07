@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="{% static 'css/header.css'%}">
+    <link rel="stylesheet" href="{% static 'css/perfil_success.css'%}">
+    {% include 'header.html' %}<br>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="cuadro">
+            tus datos:
+            <div class="publi">
+                Nombre: {{ user.nombre }}<br>
+                Correo: {{ user.correo }}
+            </div>
+            <form action="{% url 'edit' correo=correo%}" method="get">
+                escribe tu contraseña:
+                <div class="publi">
+                    <input type="password" placeholder="contraseña" name="contra"><br>
+                </div>
+                modifica los datos que deseas editar:
+                <div class="publi">
+                    <input type="text" placeholder="nuevo nombre" name="newNombre"><br>                
+                    <input type="password" placeholder="nueva contraseña" name="newContra"><br>
+                    <input type="email" placeholder="nuevo correo" name="newCorreo"><br>
+                </div>
+                <button>hola</button>
+            </form>
+            {{ reason }}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="{% static 'css/header.css'%}">
+    <link rel="stylesheet" href="{% static 'css/perfil_success.css'%}">
+    {% include 'header.html' %}<br>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="cuadro">
+            Chat con {{ correo1 }}:
+            <div class="chats">
+                {% for m in fullMsgs %}
+                <div class="publi">
+                    {{ m.correo }}:
+                    <div class="publi-c">
+                        {{ m.msg }}<br>
+                    </div>
+                    {{ m.hora }}
+                </div>
+                {% endfor %}
+            </div>
+
+            <form action="{% url 'inbox' correo=correo correo1=correo1 %}" method="get">
+                <input type="text" name="msg" placeholder="escribe un mensaje"><button>enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        var chatsContainer = document.querySelector('.chats');
+    
+        function scrollToBottom() {
+            chatsContainer.scrollTop = chatsContainer.scrollHeight;
+        }
+    
+        // Llamar a la función una vez para asegurar que el scroll esté al final inicialmente
+        scrollToBottom();
+    </script>
+
+</body>
+</html>

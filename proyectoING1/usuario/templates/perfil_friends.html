@@ -1,0 +1,56 @@
+<!-- perfil_friends.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="{% static 'css/header.css'%}">
+    <link rel="stylesheet" href="{% static 'css/perfil_success.css'%}">
+    {% include 'header.html'%}
+</head>
+<body>
+    <div class="contenedor">
+        <div class="cuadro">
+            <form action="{% url 'friends' correo=correo %}" method="get">
+                <input type="text" name="correo1" placeholder="correo">
+                <button type="submit">Enviar solicitud</button><br>
+                {{ status }}
+            </form>
+
+            <div class="friends_list_reqs">
+                <p>Solicitudes: </p>
+                <ul>
+                    {% for friend in reqs %}
+                        <form action="{% url 'friends' correo=correo%}" method="get">
+                            <li> {{ friend.correof }}</li>
+                            <input type="hidden" name="email" value="{{ friend.correof }}">
+                            <button name="1" value="1">aceptar</button>
+                            <button name="2" value="2">rechazar</button>
+                        </form>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="friends_list_pending">
+                <p>Pendientes: </p>
+                <ul>
+                    {% for friend in pending %}
+                        <li> {{ friend.correof }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="friends_list">
+                <p>Amigos: </p>
+                <ul>
+                    {% for friend in friends %}
+                        <li> {{ friend.correof }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

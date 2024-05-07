@@ -1,0 +1,11 @@
+<header>
+    <div class="left-content">
+        Super cuenta de {{ correo }} ""(*-*)""
+    </div>
+
+    <div class="right-content">
+        <form action="{% url 'logOut_adm' correo=correo%}">
+            <button class="button-h">cerrar sesion</button>
+        </form>
+    </div>
+</header>

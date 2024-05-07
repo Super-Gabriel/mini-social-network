@@ -1,0 +1,67 @@
+body {
+    background-image: linear-gradient(to bottom, #BE989D, #CFBCBF);
+    background-size: cover;
+    background-position: center top;
+    background-attachment: fixed;
+    font-style: inter;
+    font-size: 16px;
+}
+
+.cuadro {
+    border-radius: 15px;
+    padding: 15px;
+    width: 320px;
+    height: 380px;
+    margin-top: 7%;
+    margin-left: 37%;
+    text-align: center;
+    background-color: #C393BC;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;  
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);  
+  }
+
+  .cuadro input[type="text"], .cuadro input[type="email"], .cuadro input[type="password"], .cuadro input[type="date"], .cuadro select {
+    width: 280px;
+    height: 30px;
+    margin-bottom: 15px;
+    background-color: #D9D9D9; 
+    border-radius: 7px; 
+    border: none; 
+  }
+  
+  .cuadro button {
+    width: 70px;
+    height: 30px;
+    background-color: #95197D;
+    border-radius: 7px;
+    border: none; 
+    font-weight: bold;
+    color:white;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+
+  p {
+    font-size: 20px;
+    font-weight: bold;
+    color: #423434;
+  }
+  
+  .mensaje {
+    font-size: 20px; 
+    font-weight: bold; 
+    border-radius: 15px;
+    padding: 15px;
+    width: 320px;
+    height: 45px;
+    margin-top: 1%;
+    margin-left: 37%;
+    text-align: center;
+    background-color: #b986af;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;  
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);    
+  }

@@ -1,0 +1,28 @@
+<header>
+    <div class="left-content">
+        cuenta de {{ correo }} (*-*)
+    </div>
+
+    <div class="right-content">
+
+        <form action="{% url 'perfil_success' correo=correo%}">
+            <button class="button-h">casa</button>
+        </form>
+
+        <form action="{% url 'friends' correo=correo%}">
+            <button class="button-h">amigos</button>
+        </form>
+
+        <form action="{% url 'chats' correo=correo%}">
+            <button class="button-h">mensajes</button>
+        </form>
+
+        <form action="{% url 'edit' correo=correo%}">
+            <button class="button-h">editar perfil</button>
+        </form>
+
+        <form action="{% url 'logOut' correo=correo%}">
+            <button class="button-h">cerrar sesion</button>
+        </form>
+    </div>
+</header>
