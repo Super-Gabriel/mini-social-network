@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from superUsr.models import *
 from usuario.models import *
+from django.views.decorators.cache import cache_control
 
 # Create your views here.
 def logIn_adm(request):
@@ -17,6 +18,7 @@ def logIn_adm(request):
     }
     return render(request, 'logIn_adm.html', ctx)
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def success_adm(request, correo):
     if verifySesion_adm(request, correo=correo):
         users = UsuariosDB.objects.all()
@@ -54,6 +56,8 @@ def manageUsr_adm(request, correo, email, r):
 
         if r==1:
             user.alive = 2
+            user.isOn = False
+            user.ip = ""
             user.save()
 
         if r==2:

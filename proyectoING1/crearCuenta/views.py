@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from usuario.models import *
+import re
+from datetime import datetime
 
 # Create your views here.
 def crearCta(request):
@@ -20,6 +22,18 @@ def agregarCta(request):
 
     # para verificar que no sean nulos
     if all(x is not "" for x in datos):
+
+        # verificando email valido
+        if verifyEmail(request, corr):
+            True
+        else:
+            return  render(request,'errorCrearCta.html',{'reason': "correo invalido"})
+
+        # verificando fecha valida
+        if verifyFecha(request, fecha):
+            True
+        else:
+            return  render(request,'errorCrearCta.html',{'reason': "fecha invalida"})
 
         #para ver que el correo no esté en la base de datos
         try:
@@ -46,6 +60,23 @@ def agregarCta(request):
     # finalmente retornado c:
     return result
 
+def verifyFecha(request, fecha):
+    fecha = datetime.strptime(fecha, '%Y-%m-%d').date()
+    fechaNow = datetime.now().date()
+    if fecha < fechaNow:
+        return True
+    return False
+    
+
+def verifyEmail(request, correo):
+     # Expresión regular para verificar la estructura de un correo electrónico
+    email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    
+    # Verificar si el correo cumple con la estructura
+    if re.match(email_regex, correo):
+        return True
+    else:
+        return False
 
 def redirectToHome(request):
     return redirect('home')

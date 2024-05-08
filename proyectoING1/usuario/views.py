@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from usuario.models import *
 from django.db.models import Q
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_control
 
 # Create your views here.
 def inicioSesion(request):
@@ -28,6 +30,8 @@ def perfil(request):
     else:
         return render(request, 'perfil.html')
 
+
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def edit(request, correo):
     if verifySesion(request, correo=correo):
 
@@ -68,6 +72,8 @@ def edit(request, correo):
     else:
         return HttpResponse(f'sesion invalida')
 
+
+from crearCuenta.views import verifyEmail
 def changeData(request, correo, contra, r, value):
     if verifySesion(request, correo):
         usuario = UsuariosDB.objects.get(correo=correo)
@@ -85,6 +91,13 @@ def changeData(request, correo, contra, r, value):
                     return False
                 except:
                     True
+
+                #verificando validez del correo
+                if verifyEmail(request, value):
+                    True
+                else:
+                    return False
+                
                 #cambiando los correos de los posts
                 posts = PostsDB.objects.filter(correo=correo)
                 for user in posts:
@@ -117,6 +130,8 @@ def changeData(request, correo, contra, r, value):
     else:
         return HttpResponse(f'sesion invalida')
 
+
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def perfil_success(request, correo):
     if verifySesion(request, correo):
         post = request.GET.get('post')
@@ -164,6 +179,7 @@ def logOut(request, correo):
     return HttpResponse (f'sesion invalida')
 
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def friends(request, correo):
     if verifySesion(request, correo):
 
@@ -229,6 +245,7 @@ def send_friend_req(request, correo, correo1):
     return HttpResponse(f'sesion invalida')
 
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def chats(request, correo):
     if verifySesion(request, correo):
 
@@ -242,6 +259,7 @@ def chats(request, correo):
         return HttpResponse(f'sesion invalida')
 
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def inbox(request, correo, correo1):
     if verifySesion(request, correo):
         msg = request.GET.get('msg')
@@ -261,11 +279,13 @@ def inbox(request, correo, correo1):
     else:
         return HttpResponse(f'sesion invalida')
 
+
 def send_msg(request, correo, correo1, msg):
     if verifySesion(request, correo):
         MsgsDB(correo=correo, correof=correo1, msg=msg).save()
     else:
         return HttpResponse(f'sesion invalida')
+
 
 def actualizar(request):
     return render(request, 'actEoo.html')
@@ -316,8 +336,18 @@ def verifyLogin(request, correo):
 
     return True
 
+from datetime import datetime
+from django.utils import timezone
+
 def prueba(request):
-    x = request.GET.get('post')
+    x = request.GET.get('fechaNac')
+    x = datetime.strptime(x, '%Y-%m-%d').date()
+    y = datetime.now().date()
+    z = x<y
+    ct = [x,y,z]
+    ctx = {
+        'ct': ct
+    }
     if x=="":
         return HttpResponse(f'df')
-    return render(request, 'prueba.html', {'x': x})
+    return render(request, 'prueba.html', ctx)
