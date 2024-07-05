@@ -8,3 +8,7 @@ A social network implemented using Django (without Bootstrap)
 - edit info
 - create account
 - super user section
+
+## how to run
+- cd mini-social-network/proyectoING1/
+- python manage.py runserver
